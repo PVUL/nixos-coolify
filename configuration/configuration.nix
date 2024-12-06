@@ -40,12 +40,12 @@
   # User and access setup
   users.users = {
     root = {
-      openssh.authorizedKeys.keyFiles = [ "/etc/ssh/root_authorized_keys" ];
+      openssh.authorizedKeys.keyFiles = [ "/etc/ssh/authorized_keys" ];
     };
     nixos = {
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" ];  # Grants sudo and Docker access.
-      openssh.authorizedKeys.keyFiles = [ "/home/nixos/.ssh/authorized_keys" ];
+      openssh.authorizedKeys.keyFiles = [ "/etc/ssh/authorized_keys" ];
     };
   };
 
@@ -57,8 +57,10 @@
   # SSH configuration
   services.openssh = {
     enable = true;
-    permitRootLogin = "prohibit-password"; # Only allows root login via SSH keys.
-    passwordAuthentication = false;       # Disables password-based SSH login.
+    settings = {
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = false;
+    };
   };
 
   # System packages
