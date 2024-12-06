@@ -6,6 +6,11 @@
   # Basic system configuration
   system.stateVersion = "24.05";
   
+  # Set global environmental variables
+  environment.variables = {
+    COOLIFY_DB_PASSWORD = "coolify";
+  };
+
   # Boot configuration
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -40,7 +45,9 @@
   # Docker container for Coolify
   containers.coolify = {
     image = "coollabsio/coolify:latest";
-    environmentFile = "/home/nixos/nixos-coolify/.env";
+    environment = {
+      COOLIFY_DB_PASSWORD = config.environment.variables.COOLIFY_DB_PASSWORD;
+    }; 
     ports = [ "80" "443" "3000" ];
     restartPolicy = "always"; # Automaticaly restart container if it stops
     volumes = [ "/mnt/data:/data" ];
