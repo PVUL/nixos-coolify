@@ -35,22 +35,16 @@
       enable = true;
       dates = "weekly";
     };
+   containers = {
+     coolify = {
+       image = "coollabsio/coolify:latest";
+       environmentFile = "/home/nixos/nixos-coolify/.env";
+       ports = [ "80" "443" "3000" ];
+       volumes = [ "/mnt/data:/data" ];
+     };
+   };
   };
 
-  # Docker container for Coolify
-  containers.coolify = {
-    image = "coollabsio/coolify:latest";  # Official Coolify Docker image
-    ports = [ "3000:3000" ];  # Expose Coolify's web UI on port 3000
-    restartPolicy = "always";  # Automatically restart container if it stops
-    environment = {
-      COOLIFY_DB_PASSWORD = "your_db_password";  # Replace with your DB password
-    };
-    volumes = [
-      "/var/lib/coolify/data:/coolify/data"  # Mount volume for data persistence
-    ];
-  };
-
-  # User and access setup
   users.users = {
     nixos = {
       isNormalUser = true;
