@@ -6,6 +6,10 @@
   # Basic system configuration
   system.stateVersion = "24.05";
   
+  # Boot configuration
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  
   # Networking
   networking = {
     hostName = "coolify-server";
