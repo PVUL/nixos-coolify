@@ -35,7 +35,7 @@
       enable = true;
       dates = "weekly";
     };
-   containers = {
+   services = {
      coolify = {
        image = "coollabsio/coolify:latest";
        environmentFile = "/home/nixos/nixos-coolify/.env";
