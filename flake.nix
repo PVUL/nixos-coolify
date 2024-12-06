@@ -8,9 +8,9 @@
 
   outputs = { self, nixpkgs, ... }: {
     nixosConfigurations.coolify = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";  # Adjust for your architecture
+      system = "x86_64-linux";
       modules = [
-        ./configuration.nix  # Import the main configuration file
+        ./configuration/configuration.nix  # Keep this as it is
       ];
     };
   };
