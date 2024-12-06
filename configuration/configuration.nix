@@ -35,14 +35,15 @@
       enable = true;
       dates = "weekly";
     };
-   services = {
-     coolify = {
-       image = "coollabsio/coolify:latest";
-       environmentFile = "/home/nixos/nixos-coolify/.env";
-       ports = [ "80" "443" "3000" ];
-       volumes = [ "/mnt/data:/data" ];
-     };
-   };
+  };
+
+  # Docker container for Coolify
+  containers.coolify = {
+    image = "coollabsio/coolify:latest";
+    environmentFile = "/home/nixos/nixos-coolify/.env";
+    ports = [ "80" "443" "3000" ];
+    restartPolicy = "always"; # Automaticaly restart container if it stops
+    volumes = [ "/mnt/data:/data" ];
   };
 
   users.users = {
